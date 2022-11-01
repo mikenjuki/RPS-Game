@@ -21,6 +21,18 @@ const getPlayerChoice = function () {
     return selection;
 };
 
+const getComputerChoice = function () {
+    let randomValue = Math.floor(Math.random() * 11);
+
+    if (randomValue <= 3) {
+        return ROCK;
+    } else if (randomValue <= 7) {
+        return PAPER;
+    } else {
+        return SCISSORS;
+    }
+};
+
 
 startGameBtn.addEventListener("click", function () {
     if (gameIsRunning) {

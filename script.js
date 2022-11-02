@@ -3,7 +3,10 @@ const startGameBtn = document.getElementById("start-game-btn");
 const ROCK = "ROCK";
 const PAPER = "PAPER";
 const SCISSORS = "SCISSORS";
-const DEFAULT_USER_CHOICE = ROCK;
+const DEFAULT_USER_CHOICE = SCISSORS;
+const RESULT_DRAW = "IT'S A DRAW!";
+const RESULT_PLAYER_WINS = "You won, let's go again!";
+const RESULT_COMPUTER_WINS = "I won, I'm too good at this!";
 
 gameIsRunning = false;
 
@@ -33,13 +36,48 @@ const getComputerChoice = function () {
     }
 };
 
+const getWinner = function (cChoice, pChoice) {
+    if (cChoice === pChoice) {
+        return RESULT_DRAW;
+    } else if (
+        cChoice === ROCK && pChoice === PAPER ||
+        cChoice === PAPER && pChoice === SCISSORS ||
+        cChoice === SCISSORS && pChoice === ROCK) {
+        return RESULT_PLAYER_WINS;
+    } else {
+        return RESULT_COMPUTER_WINS;
+    }
+};
+
 
 startGameBtn.addEventListener("click", function () {
     if (gameIsRunning) {
         return;
+    } else {
+        gameIsRunning = true;
+
+        console.log("Initializing game sequence...");
+
+        const playerChoice = getPlayerChoice();
+        console.log("Player chose", playerChoice);
+
+        const computerChoice = getComputerChoice();
+        console.log("Computer chose", computerChoice);
+
+        const winner = getWinner(computerChoice, playerChoice);
+        console.log(winner);
+
+        let message = `You picked ${playerChoice}, computer picked ${computerChoice}, therefore you `;
+        if (winner === RESULT_DRAW) {
+            message = message + "had a draw.";
+        } else if (winner === RESULT_PLAYER_WINS) {
+            message = message + "won.";
+        } else {
+            message = message + "lost.";
+        }
+        alert(message);
+
+        gameIsRunning = false;
     }
-    gameIsRunning = true;
-    console.log("Initializing game sequence...");
-    const playerSelection = getPlayerChoice();
-    console.log(playerSelection);
+
 });

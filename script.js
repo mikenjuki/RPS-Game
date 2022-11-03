@@ -10,7 +10,7 @@ const RESULT_COMPUTER_WINS = "I won, I'm too good at this!";
 
 gameIsRunning = false;
 
-const getPlayerChoice = function () {
+const getPlayerChoice = () => {
     const selection = prompt(`${ROCK}, ${PAPER} or ${SCISSORS}?`, "").toUpperCase();
 
     if (
@@ -24,7 +24,7 @@ const getPlayerChoice = function () {
     return selection;
 };
 
-const getComputerChoice = function () {
+const getComputerChoice = () => {
     let randomValue = Math.floor(Math.random() * 11);
 
     if (randomValue <= 3) {
@@ -36,7 +36,7 @@ const getComputerChoice = function () {
     }
 };
 
-const getWinner = function (cChoice, pChoice) {
+const getWinner = (cChoice, pChoice) => {
     if (cChoice === pChoice) {
         return RESULT_DRAW;
     } else if (
@@ -50,7 +50,7 @@ const getWinner = function (cChoice, pChoice) {
 };
 
 
-startGameBtn.addEventListener("click", function () {
+startGameBtn.addEventListener("click", () => {
     if (gameIsRunning) {
         return;
     } else {
